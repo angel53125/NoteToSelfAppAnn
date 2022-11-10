@@ -3,9 +3,11 @@ package com.hfad.notetoselfappann;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -13,19 +15,21 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 {
 
+    private  FragmentManager fragmentManager;
     private ArrayList<ClassInfo> classList;
 
 
-    public  MyAdapter()
+    public  MyAdapter(FragmentManager man,ArrayList<ClassInfo> n)
     {
-        classList = DataBase.getData();
+        fragmentManager = man;
+        classList = n;
     }
 
-    //inflate vacation row item
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Create a new view, which defines the UI of the list item
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.note_item, parent, false); //check this line
 
@@ -49,7 +53,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         holder.setData(cl,position);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
 
 
@@ -59,6 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         private  TextView tvName;
         private  TextView tvStatus;
         private  TextView tvDesc;
+        private ImageView imgDelete;
 
 
 
@@ -67,14 +72,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
             tvName = itemView.findViewById(R.id.txt_title);
             tvStatus = itemView.findViewById(R.id.txt_status);
             tvDesc = itemView.findViewById(R.id.txt_text);
+            imgDelete = itemView.findViewById(R.id.img_delete);
 
 
 
-            //classList.remove(currentPosition);
-            System.out.println("Position" + currentPosition);
 
-            //notifyItemRemoved(currentPosition);
-            //notifyItemRangeChanged(currentPosition,classList.size());
+
+            imgDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    classList.remove(currentPosition);
+                    System.out.println("Position" + currentPosition);
+
+                    notifyItemRemoved(currentPosition);
+                    notifyItemRangeChanged(currentPosition,classList.size());
+                }
+            });
+
+            itemView.setClickable(true);
+            itemView.setOnClickListener(this);
 
 
         }
@@ -87,6 +103,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
             currentPosition = pos;
             currentNote = cl;
 
+        }
+
+        @Override
+        public void onClick(View view)
+        {
+            DialogShowNote dialog = new DialogShowNote(currentNote);
+            dialog.show(fragmentManager,"");
         }
 
     }
