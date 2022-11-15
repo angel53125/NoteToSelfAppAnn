@@ -55,8 +55,10 @@ public class DataBase {
             allNotes.add(new ClassInfo(status.get(i),title.get(i),desc.get(i)));
         }
 
+    }
 
-
-
+    public static void addNote(String status, String title, String desc)
+    {
+       ClassInfo c = new ClassInfo(title,status,desc);
     }
 }

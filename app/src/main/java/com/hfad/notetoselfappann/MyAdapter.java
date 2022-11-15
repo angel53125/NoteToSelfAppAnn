@@ -64,6 +64,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         private  TextView tvStatus;
         private  TextView tvDesc;
         private ImageView imgDelete;
+        private ImageView imgAdd;
+
 
 
 
@@ -73,8 +75,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
             tvStatus = itemView.findViewById(R.id.txt_status);
             tvDesc = itemView.findViewById(R.id.txt_text);
             imgDelete = itemView.findViewById(R.id.img_delete);
-
-
+            imgAdd = itemView.findViewById(R.id.fab);
 
 
 
@@ -88,6 +89,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
                     notifyItemRangeChanged(currentPosition,classList.size());
                 }
             });
+
+            imgAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
 
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
@@ -110,6 +119,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         {
             DialogShowNote dialog = new DialogShowNote(currentNote);
             dialog.show(fragmentManager,"");
+
         }
 
     }

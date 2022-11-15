@@ -35,7 +35,6 @@ public class DialogShowNote extends DialogFragment {
         TextView tvDescription = dialogView.findViewById(R.id.tvDescription);
         Button btnDone = dialogView.findViewById(R.id.btnDoneShowingNote);
 
-
         tvTitle.setText(note.getTitle());
         tvStatus.setText(note.getStatus());
         tvDescription.setText(note.getDescription());
