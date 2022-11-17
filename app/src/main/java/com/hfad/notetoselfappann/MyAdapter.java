@@ -16,10 +16,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 {
 
     private  FragmentManager fragmentManager;
-    private ArrayList<ClassInfo> classList;
+    private ArrayList<Note> classList;
 
 
-    public  MyAdapter(FragmentManager man,ArrayList<ClassInfo> n)
+    public  MyAdapter(FragmentManager man,ArrayList<Note> n)
     {
         fragmentManager = man;
         classList = n;
@@ -32,6 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.note_item, parent, false); //check this line
+
 
 
         System.out.println("Done Creating view");
@@ -47,7 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
     //Index in list we want to show
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        ClassInfo cl = classList.get(position);
+        Note cl = classList.get(position);
 
         System.out.println("Done populating row: " + position+  cl.getStatus());
         holder.setData(cl,position);
@@ -58,15 +59,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
 
         private int currentPosition = -1;
-        private ClassInfo getCurrentNote = null;
-        private ClassInfo currentNote = null;
+        private Note getCurrentNote = null;
+        private Note currentNote = null;
         private  TextView tvName;
         private  TextView tvStatus;
         private  TextView tvDesc;
         private ImageView imgDelete;
-        private ImageView imgAdd;
-
-
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -75,7 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
             tvStatus = itemView.findViewById(R.id.txt_status);
             tvDesc = itemView.findViewById(R.id.txt_text);
             imgDelete = itemView.findViewById(R.id.img_delete);
-            imgAdd = itemView.findViewById(R.id.fab);
+
 
 
 
@@ -90,12 +88,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
                 }
             });
 
-            imgAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                }
-            });
+
 
 
             itemView.setClickable(true);
@@ -104,7 +98,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
         }
 
-        public void setData(ClassInfo cl,int pos)
+        public void setData(Note cl, int pos)
         {
             tvName.setText(cl.getTitle());
             tvStatus.setText(cl.getStatus());

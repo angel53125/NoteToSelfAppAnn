@@ -3,10 +3,10 @@ package com.hfad.notetoselfappann;
 import java.util.ArrayList;
 
 public class DataBase {
-    private static ArrayList<ClassInfo> allNotes;
+    private static ArrayList<Note> allNotes;
 
 
-    public static ArrayList<ClassInfo> getData() {
+    public static ArrayList<Note> getData() {
         if (allNotes == null) {
             loadData();
         }
@@ -15,7 +15,7 @@ public class DataBase {
 
 
     private static void loadData() {
-        allNotes= new ArrayList<ClassInfo>();
+        allNotes= new ArrayList<Note>();
 
         ArrayList<String> status = new ArrayList<String>();
         ArrayList<String> title = new ArrayList<String>();
@@ -29,12 +29,19 @@ public class DataBase {
         status.add("Friends");
         status.add("Not Friends");
         status.add("Hobbies");
+        status.add("Friends");
+        status.add("Not Friends");
+        status.add("Hobbies");
+
 
         title.add("title");
         title.add("title 2");
         title.add("title 3");
         title.add("title 4");
         title.add("title 5");
+        title.add("title 6");
+        title.add("title 7");
+        title.add("title 8");
         title.add("title 6");
         title.add("title 7");
         title.add("title 8");
@@ -47,18 +54,22 @@ public class DataBase {
         desc.add("desc 6");
         desc.add("desc 7");
         desc.add("desc 8");
+        desc.add("desc 6");
+        desc.add("desc 7");
+        desc.add("desc 8");
 
 
 
         for (int i = 0;i < status.size();i++)
         {
-            allNotes.add(new ClassInfo(status.get(i),title.get(i),desc.get(i)));
+            allNotes.add(new Note(status.get(i),title.get(i),desc.get(i)));
         }
 
     }
 
     public static void addNote(String status, String title, String desc)
     {
-       ClassInfo c = new ClassInfo(title,status,desc);
+       Note c = new Note(title,status,desc);
+       allNotes.add(c);
     }
 }

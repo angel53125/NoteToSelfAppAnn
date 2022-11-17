@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,11 +17,11 @@ import androidx.fragment.app.DialogFragment;
 
 
 public class NewDialogShowNote extends DialogFragment{
-    private ClassInfo ci;
-
-    public NewDialogShowNote(ClassInfo c)
+    private Note ci;
+    private MyAdapter myAdapter;
+    public NewDialogShowNote(MyAdapter ma)
     {
-        ci = c;
+        myAdapter = ma;
     }
 
     @NonNull
@@ -39,14 +38,24 @@ public class NewDialogShowNote extends DialogFragment{
         RadioButton rbRem = dialogView.findViewById(R.id.radioButton_reminder);
         RadioButton rbList = dialogView.findViewById(R.id.radioButton_list);
         Button btnAdd = dialogView.findViewById(R.id.buttonAdd);
-
+        RadioButton rb[] = {rbIdea,rbList,rbRem};
         //allNotes.add(new ClassInfo(status.get(i),title.get(i),desc.get(i)));
 
-       DataBase.addNote(edTitle.getText().toString(),rbIdea.getText().toString(),edDesc.getText().toString());
+
+
+
+        System.out.println("Data before"+ DataBase.getData().size());
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                for(int i = 0; i < rb.length;i++) {
+                    if(rb[i].isChecked()) {
+                        DataBase.addNote(edTitle.getText().toString(), rb[i].getText().toString(), edDesc.getText().toString());
+                    }
+                    }
+                System.out.println("Data After"+ DataBase.getData().size());
+                myAdapter.notifyDataSetChanged();
+                myAdapter.notifyItemRangeChanged(0,DataBase.getData().size());
                 dismiss();
             }
         });

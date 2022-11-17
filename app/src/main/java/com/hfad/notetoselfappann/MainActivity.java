@@ -5,20 +5,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setUpRecyclerView();
-
-    }
-
-    private void setUpRecyclerView()
-    {
         RecyclerView rv = findViewById(R.id.recyclerView);
         //adapter
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager(),DataBase.getData());
@@ -27,5 +24,23 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation((RecyclerView.VERTICAL));
         rv.setLayoutManager(layoutManager);
+        FloatingActionButton imgAdd;
+        imgAdd = findViewById(R.id.fab);
+
+
+
+        imgAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                NewDialogShowNote newDialog = new NewDialogShowNote(adapter);
+                newDialog.show(getSupportFragmentManager(),"");
+
+            }
+        });
+
     }
+
+
 }

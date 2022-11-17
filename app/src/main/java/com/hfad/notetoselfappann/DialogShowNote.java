@@ -14,9 +14,9 @@ import androidx.fragment.app.DialogFragment;
 
 public class DialogShowNote extends DialogFragment {
 
-    private ClassInfo note;
+    private Note note;
 
-    public DialogShowNote(ClassInfo n)
+    public DialogShowNote(Note n)
     {
         note = n;
     }
