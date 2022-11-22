@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,13 +16,17 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 {
 
-    private  FragmentManager fragmentManager;
+    //private  FragmentManager fragmentManager;
     private ArrayList<Note> classList;
+    private MainActivity main;
 
 
-    public  MyAdapter(FragmentManager man,ArrayList<Note> n)
+
+
+
+    public  MyAdapter(MainActivity man,ArrayList<Note> n)
     {
-        fragmentManager = man;
+        main = man;
         classList = n;
     }
 
@@ -111,8 +116,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         @Override
         public void onClick(View view)
         {
+            NewDialogShowNote newDialog = new NewDialogShowNote();
+            FragmentActivity fa = (FragmentActivity) view.getContext();
+            FragmentManager fm = fa.getSupportFragmentManager();
             DialogShowNote dialog = new DialogShowNote(currentNote);
-            dialog.show(fragmentManager,"");
+            dialog.show(fm,"");
 
         }
 

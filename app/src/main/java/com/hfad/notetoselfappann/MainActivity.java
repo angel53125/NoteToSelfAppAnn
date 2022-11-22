@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity{
 
         RecyclerView rv = findViewById(R.id.recyclerView);
         //adapter
-        MyAdapter adapter = new MyAdapter(getSupportFragmentManager(),DataBase.getData());
+        MyAdapter adapter = new MyAdapter(this,DataBase.getData());
         rv.setAdapter(adapter);
         //manager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -34,8 +34,10 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
 
 
-                NewDialogShowNote newDialog = new NewDialogShowNote(adapter);
-                newDialog.show(getSupportFragmentManager(),"");
+               NewDialogShowNote newDialog = new NewDialogShowNote();
+               newDialog.show(getSupportFragmentManager(),"");
+
+
 
             }
         });

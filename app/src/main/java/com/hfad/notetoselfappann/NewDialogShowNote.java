@@ -19,10 +19,13 @@ import androidx.fragment.app.DialogFragment;
 public class NewDialogShowNote extends DialogFragment{
     private Note ci;
     private MyAdapter myAdapter;
-    public NewDialogShowNote(MyAdapter ma)
+    public NewDialogShowNote()
     {
-        myAdapter = ma;
     }
+
+
+
+
 
     @NonNull
     @Override
@@ -54,8 +57,8 @@ public class NewDialogShowNote extends DialogFragment{
                     }
                     }
                 System.out.println("Data After"+ DataBase.getData().size());
-                myAdapter.notifyDataSetChanged();
-                myAdapter.notifyItemRangeChanged(0,DataBase.getData().size());
+               // myAdapter.notifyDataSetChanged();
+                //myAdapter.notifyItemRangeChanged(0,DataBase.getData().size());
                 dismiss();
             }
         });
